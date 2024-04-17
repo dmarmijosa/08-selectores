@@ -1,0 +1,47 @@
+<h1 class="mt-5">Selectores anidados</h1>
+<hr />
+<form [formGroup]="myForm">
+  <!-- Region -->
+  <div class="row mb-3">
+    <div class="col">
+      <label for="" class="form-label">Continente:</label>
+      <select formControlName="region" class="form-control">
+        @for (region of regions; track $index) {
+          <option [value]="region">{{ region }}</option>
+        }
+        <option value="">-- Seleccione Contiente --</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="row mb-3" *ngIf="countriesByRegion.length>0">
+    <div class="col">
+      <label for="" class="form-label">Countries:</label>
+      <select formControlName="country" class="form-control">
+        @for (countries of countriesByRegion; track $index) {
+          <option [value]="countries.cca3">{{ countries.name }}</option>
+        }
+        <option value="">-- Seleccione un País --</option>
+      </select>
+    </div>
+  </div>
+
+    <!-- Borders -->
+    <div class="row mb-3" *ngIf="borders.length>0">
+      <div class="col">
+        <label for="" class="form-label">Fronteras:</label>
+        <select formControlName="border" class="form-control">
+          @for (border of borders; track $index) {
+            <option [value]="border.cca3">{{ border.name }}</option>
+          }
+          <option value="">-- Seleccione una frontera --</option>
+        </select>
+      </div>
+    </div>
+</form>
+<h3>Formulario</h3>
+<code>
+  {{ myForm.value | json }}
+</code>
+<p>is form valid: {{ myForm.valid }}</p>
